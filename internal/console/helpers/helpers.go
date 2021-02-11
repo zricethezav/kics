@@ -97,6 +97,7 @@ func WordWrap(s, identation string, limit int) string {
 func PrintResult(summary *model.Summary, failedQueries map[string]error) error {
 	fmt.Printf("Files scanned: %d\n", summary.ScannedFiles)
 	fmt.Printf("Parsed files: %d\n", summary.ParsedFiles)
+	fmt.Printf("Failed to parse files: %d\n", summary.FailedToParseFiles)
 	fmt.Printf("Queries loaded: %d\n", summary.TotalQueries)
 
 	fmt.Printf("Queries failed to execute: %d\n", summary.FailedToExecuteQueries)

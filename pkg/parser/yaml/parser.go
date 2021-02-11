@@ -24,7 +24,14 @@ func (p *Parser) Parse(_ string, fileContent []byte) ([]model.Document, error) {
 	dec := yaml.NewDecoder(bytes.NewReader(fileContent))
 
 	doc := &model.Document{}
-	for dec.Decode(doc) == nil {
+	for {
+		err := dec.Decode(doc)
+		if err != nil {
+			if err.Error() != "EOF" {
+				return nil, errors.Wrap(err, "Failed to Parse YAML")
+			}
+			break
+		}
 		if doc != nil {
 			documents = append(documents, *doc)
 		}

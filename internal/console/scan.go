@@ -211,6 +211,7 @@ func scan() error {
 	counters := model.Counters{
 		ScannedFiles:           t.FoundFiles,
 		ParsedFiles:            t.ParsedFiles,
+		FailedToParseFiles:     t.FailedParsedFiles,
 		TotalQueries:           t.LoadedQueries,
 		FailedToExecuteQueries: t.LoadedQueries - t.ExecutedQueries,
 		FailedSimilarityID:     t.FailedSimilarityID,

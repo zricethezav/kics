@@ -40,6 +40,7 @@ type Storage interface {
 type Tracker interface {
 	TrackFileFound()
 	TrackFileParse()
+	TrackFileParseError()
 }
 
 // Service is a struct that contains a SourceProvider to receive sources, a storage to save and retrieve scanning informations
@@ -70,6 +71,7 @@ func (s *Service) StartScan(ctx context.Context, scanID string, hideProgress boo
 
 			documents, kind, err := s.Parser.Parse(filename, content)
 			if err != nil {
+				s.Tracker.TrackFileParseError()
 				return errors.Wrap(err, "failed to parse file content")
 			}
 

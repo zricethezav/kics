@@ -7,6 +7,7 @@ type CITracker struct {
 	ExecutedQueries    int
 	FoundFiles         int
 	ParsedFiles        int
+	FailedParsedFiles  int
 	FailedSimilarityID int
 }
 
@@ -28,6 +29,11 @@ func (c *CITracker) TrackFileFound() {
 // TrackFileParse adds a successful parsed file to be scanned
 func (c *CITracker) TrackFileParse() {
 	c.ParsedFiles++
+}
+
+// TrackFileParseError adds a failed to parse file
+func (c *CITracker) TrackFileParseError() {
+	c.FailedParsedFiles++
 }
 
 // FailedDetectLine - queries that fail to detect line are counted as failed to execute queries
